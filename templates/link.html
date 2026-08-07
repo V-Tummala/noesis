@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+
+<title>
+Link Resource
+</title>
+
+
+<link rel="stylesheet" href="/static/style.css">
+
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<h1>
+Noesis
+</h1>
+
+
+<a href="/library">
+Library
+</a>
+
+
+</nav>
+
+
+
+
+<div class="form-container">
+
+
+<h2>
+Connect Resources
+</h2>
+
+
+
+<p>
+Choose another resource to link with this one.
+</p>
+
+
+
+<form method="POST">
+
+
+
+<select name="resource">
+
+
+{% for resource in resources %}
+
+
+<option value="{{ resource[0] }}">
+
+
+{{ resource[1] }}
+
+
+</option>
+
+
+{% endfor %}
+
+
+</select>
+
+
+
+<button>
+
+Create Link
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+</body>
+
+
+</html>

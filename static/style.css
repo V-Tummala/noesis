@@ -1,0 +1,370 @@
+/* =========================
+   NOESIS GLOBAL STYLES
+========================= */
+
+
+* {
+
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+body {
+
+    margin: 0;
+
+    background: #f4f6f8;
+
+    color: #222;
+
+}
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+
+nav {
+
+    background: #111827;
+
+    color: white;
+
+    padding: 20px 40px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+nav h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+}
+
+
+nav a {
+
+    color: white;
+
+    text-decoration: none;
+
+    margin-left: 20px;
+
+}
+
+
+nav a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================
+   HOME PAGE
+========================= */
+
+
+.home {
+
+    text-align: center;
+
+    max-width: 800px;
+
+    margin: 100px auto;
+
+    padding: 20px;
+
+}
+
+
+.home h2 {
+
+    font-size: 40px;
+
+}
+
+
+.home p {
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+.button,
+button {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+}
+
+
+.button:hover,
+button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+
+/* =========================
+   FORMS
+========================= */
+
+
+.form-container {
+
+    width: 400px;
+
+    max-width: 90%;
+
+    margin: 60px auto;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+}
+
+
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+
+label {
+
+    margin-top: 15px;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+
+}
+
+
+
+input,
+textarea,
+select {
+
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    border: 1px solid #ccc;
+
+    font-size: 15px;
+
+
+}
+
+
+
+textarea {
+
+    height: 120px;
+
+    resize: vertical;
+
+}
+
+
+
+/* =========================
+   LIBRARY
+========================= */
+
+
+main {
+
+    padding: 40px;
+
+}
+
+
+
+.library {
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px,1fr)
+    );
+
+    gap: 25px;
+
+}
+
+
+
+.card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+
+.card h3 {
+
+    margin-top: 0;
+
+}
+
+
+
+.card a {
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+}
+
+
+
+.card a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================
+   RESOURCE PAGE
+========================= */
+
+
+.resource-page {
+
+    max-width: 800px;
+
+    background: white;
+
+    margin: 60px auto;
+
+    padding: 40px;
+
+    border-radius: 12px;
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:600px){
+
+
+nav {
+
+    flex-direction: column;
+
+    gap:15px;
+
+}
+
+
+main {
+
+    padding:20px;
+
+}
+
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+
+.search {
+
+    display:flex;
+
+    flex-direction:row;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+}
+
+
+.search input {
+
+    flex:1;
+
+}
+
+
+.search button {
+
+    margin-top:0;
+
+}
