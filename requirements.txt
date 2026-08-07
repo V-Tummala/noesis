@@ -1,3 +1,5 @@
 Flask
-Flask-Login
-Werkzeug
+gunicorn
+boto3
+werkzeug
+python-dotenv
