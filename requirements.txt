@@ -1,0 +1,6 @@
+Flask
+Flask-Login
+gunicorn
+boto3
+werkzeug
+python-dotenv
