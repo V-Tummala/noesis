@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}Noesis{% endblock %}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+    <a class="brand" href="/">
+        <span class="ring"><span class="core"></span></span>
+        <span>
+            <h1>NOESIS</h1>
+            <small>HELIOS AEROSPACE &middot; INTERNAL</small>
+        </span>
+    </a>
+
+    <div class="tabs">
+        <a href="/" class="{{ 'active' if active == 'brain' else '' }}">Brain</a>
+        <a href="/library" class="{{ 'active' if active == 'library' else '' }}">Library</a>
+        <a href="/graph" class="{{ 'active' if active == 'graph' else '' }}">Graph</a>
+        <a href="/upload" class="{{ 'active' if active == 'upload' else '' }}">Ingest</a>
+    </div>
+
+    <div class="nav-right">
+
+        <form class="searchbox" method="GET" action="/library">
+            <span class="mono" style="color:#4B5563;font-size:13px">&#8981;</span>
+            <input type="text" name="search" placeholder="Search concepts, formulae, tags" value="{{ request.args.get('search','') }}">
+        </form>
+
+        {% if session.get('user') %}
+            <span class="avatar">{{ (username or 'HA')[:2] | upper }}</span>
+            <a href="/logout" style="font-size:12px;color:#6B7684">Log out</a>
+        {% else %}
+            <a href="/login" style="font-size:12px;color:#6B7684">Login</a>
+            <a href="/register" style="font-size:12px;color:#6B7684">Register</a>
+        {% endif %}
+
+    </div>
+
+</nav>
+
+{% block body %}{% endblock %}
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

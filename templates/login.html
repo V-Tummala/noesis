@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis &middot; Login{% endblock %}
+
+{% block body %}
+
+<div class="form-container auth">
+
+    <h2>Login to Noesis</h2>
+
+    <form method="POST">
+
+        <div class="field">
+            <label>EMAIL</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="field">
+            <label>PASSWORD</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Login</button>
+        </div>
+
+    </form>
+
+    <p>Don't have an account? <a href="/register">Register</a></p>
+
+</div>
+
+{% endblock %}

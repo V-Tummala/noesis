@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}{{ resource['title'] }} &middot; Noesis{% endblock %}
+
+{% block body %}
+
+<div class="resource-layout">
+
+<section class="resource-main">
+
+    <a class="back" href="/library">&larr; BACK TO LIBRARY</a>
+
+    <div class="origin" style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span class="dot" style="background:{{ region_colour(resource['region']) }};box-shadow:0 0 8px {{ region_colour(resource['region']) }}"></span>
+        <span class="mono" style="font-size:10px;letter-spacing:.18em;color:#5C6672">
+            {{ region_name(resource['region']) | upper }}
+        </span>
+        <span class="tag {{ resource['syllabus'] }}">{{ resource['syllabus'] }}</span>
+    </div>
+
+    <h2>{{ resource['title'] }}</h2>
+
+    <p class="lede">{{ resource['description'] }}</p>
+
+
+    {% if resource['formula'] %}
+    <div class="formula">
+        <div class="section-label">CANONICAL FORM</div>
+        <div class="expr">{{ resource['formula'] }}</div>
+    </div>
+    {% endif %}
+
+
+    <div style="margin-top:28px;max-width:640px">
+
+        <div class="section-label">ATTACHED SOURCES</div>
+
+        <div class="file-row">
+            <span class="ext">{{ resource['filename'].rsplit('.', 1)[1] | upper }}</span>
+            <span class="name">{{ resource['filename'].split('_', 1)[1] if '_' in resource['filename'] else resource['filename'] }}</span>
+            <a class="mono" style="font-size:10.5px;letter-spacing:.1em"
+               href="/download/{{ resource['filename'] }}">DOWNLOAD</a>
+        </div>
+
+    </div>
+
+
+    <form method="POST" action="/delete/{{ resource['id'] }}" style="margin-top:28px">
+        <div class="actions" style="justify-content:flex-start">
+            <button class="ghost" type="submit"
+                    onclick="return confirm('Delete this resource?')">
+                Delete resource
+            </button>
+        </div>
+    </form>
+
+</section>
+
+
+<aside class="links">
+
+    <div class="section-label">CONNECTED CONCEPTS</div>
+
+    {% for item in related %}
+
+        <a class="link-card" href="/resource/{{ item['id'] }}">
+
+            <div class="origin">
+                <span class="dot" style="background:{{ region_colour(item['region']) }};box-shadow:0 0 8px {{ region_colour(item['region']) }}"></span>
+                {{ region_name(item['region']) | upper }}
+            </div>
+
+            <div style="font-size:13.5px">{{ item['title'] }}</div>
+
+        </a>
+
+    {% else %}
+
+        <p class="empty" style="font-size:13px">No connected resources yet.</p>
+
+    {% endfor %}
+
+    <a class="dashed" href="/link/{{ resource['id'] }}">+ Link another concept</a>
+
+
+    <div class="section-label" style="margin-top:30px">PROVENANCE</div>
+
+    <div class="meta-box">
+        <div><span>Subject</span>{{ resource['subject'] }}</div>
+        <div><span>Syllabus</span>{{ resource['syllabus'] }}</div>
+        <div><span>Added</span>{{ resource['created'] }}</div>
+    </div>
+
+</aside>
+
+</div>
+
+{% endblock %}

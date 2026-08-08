@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis &middot; Connection map{% endblock %}
+
+{% block body %}
+
+<main>
+
+<div class="page-head">
+
+    <div>
+        <h2>Connection map</h2>
+        <p>Cross-branch links across the corpus. Every edge is a member-made connection.</p>
+    </div>
+
+    <div class="legend">
+        {% for r in regions %}
+            <span>
+                <span class="dot" style="background:{{ r.colour }};box-shadow:0 0 8px {{ r.colour }}"></span>
+                {{ r.label }}
+            </span>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+<div class="graph-panel" id="graph-panel">
+    <svg viewBox="0 0 1000 560" preserveAspectRatio="none">
+        <g id="graph-edges" stroke-width="1"></g>
+        <g id="graph-nodes"></g>
+    </svg>
+</div>
+
+<script id="graph-data" type="application/json">{{ graph_data | tojson }}</script>
+
+<script src="/static/graph.js"></script>
+
+</main>
+
+{% endblock %}

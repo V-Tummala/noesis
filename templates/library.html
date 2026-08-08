@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis Library{% endblock %}
+
+{% block body %}
+
+<main>
+
+<div class="page-head">
+
+    <div>
+        <h2>Library</h2>
+        <p>
+            {{ resources | length }} entries &middot;
+            filtered by region, subject and syllabus tag
+        </p>
+    </div>
+
+    <a class="button" href="/upload">+ New concept</a>
+
+</div>
+
+
+<div class="chips">
+
+    <a class="chip {{ 'on' if not current_region else '' }}"
+       href="{{ url_for('library', search=request.args.get('search',''), syllabus=request.args.get('syllabus','')) }}">
+        All regions
+    </a>
+
+    {% for r in regions %}
+        <a class="chip {{ 'on' if current_region == r.id else '' }}"
+           style="{{ 'color:' ~ r.colour ~ ';border-color:' ~ r.colour ~ '88;background:' ~ r.colour ~ '1F' if current_region == r.id else '' }}"
+           href="{{ url_for('library', region=r.id, search=request.args.get('search',''), syllabus=request.args.get('syllabus','')) }}">
+            {{ r.name }}
+        </a>
+    {% endfor %}
+
+</div>
+
+
+<div class="chips">
+
+    <a class="chip {{ 'on' if not current_syllabus else '' }}"
+       href="{{ url_for('library', region=current_region or '', search=request.args.get('search','')) }}">
+        Any syllabus tag
+    </a>
+
+    {% for s in ['ESAT','TMUA','Neither'] %}
+        <a class="chip {{ 'on' if current_syllabus == s else '' }}"
+           href="{{ url_for('library', syllabus=s, region=current_region or '', search=request.args.get('search','')) }}">
+            {{ s }}
+        </a>
+    {% endfor %}
+
+</div>
+
+
+<div class="library">
+
+{% for resource in resources %}
+
+    <a class="card" href="/resource/{{ resource['id'] }}">
+
+        <div class="origin">
+            <span class="dot" style="background:{{ region_colour(resource['region']) }};box-shadow:0 0 8px {{ region_colour(resource['region']) }}"></span>
+            {{ region_name(resource['region']) | upper }}
+        </div>
+
+        <h3>{{ resource['title'] }}</h3>
+
+        <div class="desc">{{ resource['description'] }}</div>
+
+        <div class="foot">
+            <span class="tag {{ resource['syllabus'] }}">{{ resource['syllabus'] }}</span>
+            <span>{{ link_counts.get(resource['id'], 0) }} links &middot; {{ resource['created'] }}</span>
+        </div>
+
+    </a>
+
+{% else %}
+
+    <p class="empty">No resources have been uploaded yet.</p>
+
+{% endfor %}
+
+</div>
+
+</main>
+
+{% endblock %}

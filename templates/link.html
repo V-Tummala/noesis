@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis &middot; Connect{% endblock %}
+
+{% block body %}
+
+<main>
+
+<div class="form-container" style="max-width:520px">
+
+    <h2 style="margin:0;font-size:26px;font-weight:500">Connect concepts</h2>
+
+    <p style="margin:10px 0 22px;font-size:13px;color:#8993A1">
+        Links are bidirectional &mdash; both concepts will show the connection.
+    </p>
+
+    <form method="POST">
+
+        <div class="field">
+            <label>LINK TO</label>
+            <select name="resource">
+                {% for resource in resources %}
+                    <option value="{{ resource['id'] }}">{{ resource['title'] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="actions">
+            <a class="button ghost" href="/resource/{{ id }}">Cancel</a>
+            <button type="submit">Create link</button>
+        </div>
+
+    </form>
+
+</div>
+
+</main>
+
+{% endblock %}

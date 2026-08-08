@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis{% endblock %}
+
+{% block body %}
+
+<div class="brain-layout">
+
+<section class="brain-stage">
+
+    <div class="brain-head">
+
+        <div>
+            <h2>The Helios second brain</h2>
+            <p>
+                Every maths and physics concept the team holds, linked across branches.
+                Select a region to open its corpus &mdash; or run a connection query
+                across the whole cortex.
+            </p>
+        </div>
+
+        <div class="stats">
+            <div class="stat"><b>{{ total_concepts }}</b>CONCEPTS</div>
+            <div class="stat"><b>{{ total_links }}</b>LINKS</div>
+            <div class="stat warn"><b>{{ days_to_exam }}</b>DAYS TO ESAT</div>
+        </div>
+
+    </div>
+
+
+    <div class="brain-wrap">
+
+        <div class="brain-inner">
+
+            {% for r in regions %}
+                <div class="rlabel {{ label_pos[r.id].cls }}"
+                     data-label="{{ r.id }}"
+                     data-colour="{{ r.colour }}"
+                     style="left:{{ label_pos[r.id].left }}%;top:{{ label_pos[r.id].top }}%">
+                    {{ r.label }}
+                </div>
+            {% endfor %}
+
+            <svg viewBox="0 0 1000 660">
+
+                <defs>
+                    <filter id="nGlow" x="-40%" y="-40%" width="180%" height="180%">
+                        <feGaussianBlur stdDeviation="9" result="b"></feGaussianBlur>
+                        <feMerge>
+                            <feMergeNode in="b"></feMergeNode>
+                            <feMergeNode in="SourceGraphic"></feMergeNode>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <g stroke="#0A0D12" stroke-width="3" stroke-linejoin="round">
+
+                    <path class="lobe" data-region="pure" fill="#4CC9F0"
+                          d="M318,112 C214,112 122,178 106,262 C94,326 128,372 196,384 L330,368 L336,128 Z"></path>
+
+                    <path class="lobe" data-region="mech" fill="#F7A44B"
+                          d="M336,128 L330,368 L566,378 L628,152 C548,104 408,102 336,128 Z"></path>
+
+                    <path class="lobe" data-region="waves" fill="#B69CFF"
+                          d="M628,152 C728,186 790,246 800,306 C806,358 770,400 706,404 L596,386 L566,378 Z"></path>
+
+                    <path class="lobe" data-region="em" fill="#58D9A3"
+                          d="M196,384 C184,448 226,500 306,512 C388,524 476,500 528,458 L552,384 L330,370 Z"></path>
+
+                    <path class="lobe" data-region="thermo" fill="#FF7A7A"
+                          d="M600,404 C692,414 754,430 758,482 C762,524 700,552 628,546 C566,540 528,514 528,466 Z"></path>
+
+                    <path class="lobe" data-region="aero" fill="#E8E3D6"
+                          d="M512,478 C512,530 492,580 464,612 C482,628 522,628 544,610 C582,562 596,518 590,476 Z"></path>
+
+                </g>
+
+                <g class="sulci">
+                    <path d="M150,240 C200,222 250,232 288,258"></path>
+                    <path d="M160,300 C214,286 258,296 296,318"></path>
+                    <path d="M380,170 C428,150 486,152 528,176"></path>
+                    <path d="M392,240 C444,220 502,222 546,246"></path>
+                    <path d="M400,306 C452,290 510,292 552,314"></path>
+                    <path d="M646,214 C692,232 726,264 740,300"></path>
+                    <path d="M630,296 C676,308 710,332 726,360"></path>
+                    <path d="M244,432 C300,456 372,462 434,448"></path>
+                    <path d="M576,440 C630,448 686,462 720,482"></path>
+                    <path d="M572,494 C624,502 674,514 704,528"></path>
+                </g>
+
+                <g id="brain-nodes" filter="url(#nGlow)"></g>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<aside class="region">
+
+    <div class="region-head">
+
+        <div class="eyebrow">
+            <span class="dot" id="region-dot"></span>
+            <span>REGION <span id="region-index">01</span> / 0{{ regions | length }}</span>
+        </div>
+
+        <h3 id="region-name"></h3>
+
+        <p id="region-blurb"></p>
+
+        <div class="region-stats">
+            <div><b id="region-count">0</b>ENTRIES</div>
+            <div><b id="region-links">0</b>LINKS OUT</div>
+            <div><b id="region-exam">0</b>EXAM-TAGGED</div>
+        </div>
+
+    </div>
+
+
+    <div class="region-list">
+
+        <div class="section-label">CONCEPTS IN REGION</div>
+
+        <div id="region-concepts"></div>
+
+    </div>
+
+
+    <div class="region-actions">
+
+        <a class="button" id="region-enter" href="/library">Enter region</a>
+
+        <a class="button ghost" href="/graph">Connection test</a>
+
+    </div>
+
+</aside>
+
+</div>
+
+
+<script id="brain-data" type="application/json">{{ brain_data | tojson }}</script>
+
+<script src="/static/brain.js"></script>
+
+{% endblock %}

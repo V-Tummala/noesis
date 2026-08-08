@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Noesis &middot; Ingest{% endblock %}
+
+{% block body %}
+
+<main>
+
+<div class="page-head" style="max-width:760px;margin:0 auto 4px">
+    <div>
+        <h2>Ingest</h2>
+        <p>
+            Manual entry for team knowledge. Curated downloads land through the
+            same schema, tagged by syllabus.
+        </p>
+    </div>
+</div>
+
+
+<div class="form-container">
+
+<form method="POST" enctype="multipart/form-data">
+
+    <div class="field">
+        <label>TITLE</label>
+        <input type="text" name="title" placeholder="e.g. Dimensional analysis" required>
+    </div>
+
+    <div class="field">
+        <label>STATEMENT</label>
+        <textarea name="description" placeholder="Explain it as you would to a new member."></textarea>
+    </div>
+
+    <div class="field">
+        <label>CANONICAL FORM (OPTIONAL)</label>
+        <input type="text" name="formula" placeholder="e.g. F = dp/dt">
+    </div>
+
+    <div class="two">
+
+        <div class="field">
+            <label>REGION</label>
+            <select name="region">
+                {% for r in regions %}
+                    <option value="{{ r.id }}">{{ r.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="field">
+            <label>SUBJECT</label>
+            <select name="subject">
+                <option>Maths</option>
+                <option>Physics</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="field">
+        <label>SYLLABUS TAG</label>
+        <select name="syllabus">
+            <option>ESAT</option>
+            <option>TMUA</option>
+            <option>Neither</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>FILE</label>
+        <input type="file" name="file" required>
+    </div>
+
+    <div class="actions">
+        <a class="button ghost" href="/library">Cancel</a>
+        <button type="submit">Publish to corpus</button>
+    </div>
+
+</form>
+
+</div>
+
+</main>
+
+{% endblock %}
